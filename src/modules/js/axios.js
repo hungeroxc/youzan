@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let host = 'http://rap2api.taobao.org/app/mock/7089/'
+const host = 'http://rap2api.taobao.org/app/mock/7089/'
 
 
 axios.interceptors.request.use(config => {
