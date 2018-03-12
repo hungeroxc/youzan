@@ -698,7 +698,7 @@ html {
 }
 
 .with-bottom-nav .class-nav {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .tabs-content {
