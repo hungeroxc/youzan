@@ -12,6 +12,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mint-ui": "^2.2.13",
+    "npm": "^5.7.1",
+    "swiper": "^4.1.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
