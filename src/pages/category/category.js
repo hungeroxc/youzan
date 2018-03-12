@@ -40,6 +40,17 @@ new Vue({
             })
         }
     },  
+    filters: {
+        number(price){
+            let str = String(price)
+            if(str.indexOf('.') < 0){
+                return price + '.00'
+            }else if(str.split('.')[1].length === 1){
+                return price + '0'
+            }
+            
+        }
+    },
     created(){
         this.getTopList()
         this.getSubList(0)
