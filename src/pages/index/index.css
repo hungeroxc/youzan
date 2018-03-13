@@ -979,6 +979,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .hot-goods li .goods-item .title {
+  word-break: break-all;
   color: #666;
   padding-bottom: 0;
   line-height: 16px;
