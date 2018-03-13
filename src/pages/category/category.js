@@ -6,7 +6,7 @@ import Foot from 'comp/Foot'
 import api from 'js/api'
 
 
-
+import mixin from 'js/mixin'
 
 new Vue({
     el: '#app',
@@ -38,24 +38,14 @@ new Vue({
             axios.get(api.rank).then(res => {
                 this.rankData = res.data.data
             })
-        }
-    },  
-    filters: {
-        number(price){
-            let str = String(price)
-            if(str.indexOf('.') < 0){
-                return price + '.00'
-            }else if(str.split('.')[1].length === 1){
-                return price + '0'
-            }
-            
+        },
+        toSearch(list){
+            location.href = `search.html?keyword=${list.name}&id=${list.id}`
         }
     },
     created(){
         this.getTopList()
         this.getSubList(0)
     },
-    components: {
-        Foot
-    }
+    mixins: [mixin]
 })
