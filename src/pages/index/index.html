@@ -22,12 +22,13 @@
   <link rel="shortcut icon" href="https://b.yzcdn.cn/v2/image/yz_fc.ico">
   <title>发现朋友圈的推荐</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <!-- <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/index.css"> -->
+  <style>
+    [v-cloak] {display: none}
+  </style>
 </head>
 
 <body class=" " style="min-height: 860px;">
-  <div id="app">
+  <div id="app" v-cloak>
     <div class="container with-bottom-nav" style="min-height: 667px;">
       <div class="content">
           <swiper :lists="bannerLists" v-if="bannerLists"></swiper>
@@ -67,7 +68,7 @@
             infinite-scroll-distance="30">
             <li v-for="(list, index) in lists" :key="list.id+index">
               <div class="goods-item">
-                <a href="https://h5.youzan.com/v2/showcase/goods?alias=2fwig6rnqfq6m&amp;source=yzapp&amp;f_platform=yzapp">
+                <a :href="'goods.html?id='+list.id">
                   <div class="thumb img-box">
                     <img class="fadeIn" :src="list.img">
                   </div>
