@@ -17,7 +17,8 @@ new Vue({
         editingShop: null,
         editingShopIndex: -1,
         removePopup: false,
-        removeData: null
+        removeData: null,
+        removeMsg: ''
     },
     methods: {
         getList(){
@@ -89,19 +90,48 @@ new Vue({
             this.removeData = {
                 shop,shopIndex,good,goodIndex
             }
+            this.removeMsg = '确定要删除该商品吗?'
         },
         removeConfirm(){
-            let {shop, shopIndex, good, goodIndex} = this.removeData
-            axios.post(api.cartRemove, {
-                id: good.id
-            }).then(res => {
-                shop.goodsList.splice(goodIndex, 1)
-                if(shop.goodsList.length === 0){
-                    this.lists.splice(shopIndex, 1)
-                    this.removeShop()
-                }
-                this.removePopup = false
-            })
+            if(this.removeMsg === '确定要删除该商品吗?'){
+                let {shop, shopIndex, good, goodIndex} = this.removeData
+                axios.post(api.cartRemove, {
+                    id: good.id
+                }).then(res => {
+                    shop.goodsList.splice(goodIndex, 1)
+                    if(shop.goodsList.length === 0){
+                        this.lists.splice(shopIndex, 1)
+                        this.removeShop()
+                    }
+                    this.removePopup = false
+                })
+            }else{
+                let ids = []
+                this.removeList.forEach(good => {
+                    ids.push(good.id)
+                })
+                axios.post(api.cartMremove, {
+                    ids
+                }).then(res => {
+                    let arr = []
+                    this.editingShop.goodsList.forEach(good => {
+                        let index = this.removeList.findIndex(item => {
+                            return item.id === good.id
+                        })
+                        if(index === -1){
+                            arr.push(good)
+                        }
+                    })
+                    if(arr.length){
+                        this.editingShop.goodsList = arr
+                    }else{
+                        this.lists.splice(this.editingShopIndex, 1)
+                        this.removeShop()
+                    }
+                    this.removePopup = false
+                })
+            }
+
         },
         removeShop(){
             this.editingShop = null
@@ -110,6 +140,10 @@ new Vue({
                 shop.editing = false
                 shop.editingMsg = '编辑'
             })
+        },
+        removeLists(){
+            this.removePopup = true
+            this.removeMsg = `确定将所选的${this.removeList.length}个商品删除?`
         }
     },
     computed: {
