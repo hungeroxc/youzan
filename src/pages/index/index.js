@@ -20,7 +20,9 @@ let app = new Vue({
         loading: false,
         allLoaded: false,
 
-        bannerLists: null
+        bannerLists: null,
+
+        goodShop: null
     },
     methods: {
         getLists(){
@@ -50,11 +52,17 @@ let app = new Vue({
             axios.get(url.banner).then(res => {
                 this.bannerLists = res.data.lists
             })
+        },
+        getGoodShop(){
+            axios.get(url.goodShop).then(res => {
+                this.goodShop = res.data.lists
+            })
         }
     },
     created(){
         this.getLists()
         this.getBanner()
+        this.getGoodShop()
     },
     components: {
         Foot,

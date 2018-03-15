@@ -1,5 +1,6 @@
 let url = {
     hostLists: '/index/hostLists',
+    goodShop: '/index/goodShop',
     banner: '/index/banner',
     topList: '/category/topList',
     subList: '/category/subList',
